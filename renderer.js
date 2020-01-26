@@ -4,6 +4,8 @@ let graphPoints = [];
 // Default Speed and No. of harmonics
 let BASE_FREQ = 0.05; 
 let harmonicsCount = 10;
+let isPaused = false;
+let lowGraphicsMode = false;
 
 function polarLine({x,y,r,ang}) {
 	let x2 = x - r*sin(ang);
@@ -17,8 +19,11 @@ function drawLines() {
 	stroke(255);
 	let x = 250, y = 250;
 	let res = {x,y};
-	lines.forEach((l,i) => {
+	lines.forEach(l => {
 		let {A,f,ph} = l;
+		if (lowGraphicsMode && Math.abs(A) < 0.1) {
+			return; // Dont bother showing the tiny components
+		}
 		res = polarLine({x,y,r:A,ang:f*t + (ph||0)});
 		x = res.x; y = res.y;
 	});
@@ -38,9 +43,14 @@ function drawGraphPoints() {
 	for (let i = 0; i < graphPoints.length-1; i++) {
 		let p1 = graphPoints[i]; 
 		let p2 = graphPoints[i+1];
-		line(250 - t + p1.x,p1.y, 250 - t + p2.x, p2.y);
+
+		if (lowGraphicsMode) {
+			point(250 - t + p1.x,p1.y);
+		} else {
+			line(250 - t + p1.x,p1.y, 250 - t + p2.x, p2.y);
+		}
 	}
-	
+
     if (graphPoints.length > 250) {
    	    graphPoints.splice(0,1); 
     }
@@ -55,8 +65,7 @@ function resetGraph() {
 function setup() {
 	createCanvas(500, 500).parent('canvas');
 	stroke(255);
-	squareWave(harmonicsCount);
-	
+	posExpWave();	
 }
 
 function drawAxisLabels() {
@@ -80,11 +89,29 @@ function drawAxisLabels() {
 	strokeWeight(1.5);
 }
 
+function drawPhaseIndicator() {
+	strokeWeight(0.5);
+	stroke(255); fill(255);
+	text("Phase", 440, 25);
+	
+	// Mini grid lines
+	line(440,60,480,60)
+	line(460,40,460,80)
+	strokeWeight(1.5);
+	stroke(255,0,0);
+	let curPhase = (t*BASE_FREQ) % (2*PI);
+	line(460,60, 460 + 15*cos(curPhase), 60 - 15*sin(curPhase))
+}
+
 function draw() {
+	if (isPaused) {
+		return;
+	}
 	background(0);
 	stroke(255);
 	drawAxisLabels();
+	drawPhaseIndicator();
 	drawLines();	
     drawGraphPoints();
-    t++;
+	t++;
 }
