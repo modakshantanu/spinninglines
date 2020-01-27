@@ -10,9 +10,9 @@ function sawtoothWave(n) {
     n = n || harmonicsCount;
     currentPreset = sawtoothWave;
     resetGraphData();
-    let amp = 75;
+    let amp = 3.75;
     for (let i = 1; i <= n; i++) {
-        lines.push({A : (amp/i) * (i%2 ? 1:-1) , f : BASE_FREQ * i, ph : PI/2})  
+        lines.push({A : (amp/i) * (i%2 ? 1:-1) , f :  i, ph : PI/2})  
     }
 }
 
@@ -21,9 +21,9 @@ function squareWave(n) {
     currentPreset = squareWave;
 
     resetGraphData();
-    let amp = 100
+    let amp = 5
     for (let i = 0; i < n; i++) {
-        lines.push({A : amp * (((i+1)%2 == 1?1:-1)) / (i*2+1), f : BASE_FREQ*(1+2*i) });
+        lines.push({A : amp * (((i+1)%2 == 1?1:-1)) / (i*2+1), f : (1+2*i) });
     }
 }
 
@@ -32,44 +32,38 @@ function triangleWave(n) {
     currentPreset = triangleWave;
 
     resetGraphData();
-	let amp = 100;
+	let amp = 5;
 	for (let i = 0; i < n; i++) {
-		lines.push({A: amp*(1/((i*2 + 1)**2)) , f: BASE_FREQ * (i*2 + 1)})
+		lines.push({A: amp*(1/((i*2 + 1)**2)) , f:  (i*2 + 1)})
 	}
 }
 
-function sineWave(amp, freq, phase) {
-    amp = amp || 100;
-    freq = freq || 1;
-    phase = phase || 0;
+function sineWave(amp = 5, freq = 1, phase = 0) {
+
     resetGraphData();
     currentPreset = sineWave;
-    lines.push({A : amp/2 , f: BASE_FREQ * freq, ph: -PI/2 + phase}) // -ie^ix
-    lines.push({A : amp/2 , f: BASE_FREQ * -freq, ph: PI/2 - phase}) // ie^-ix
+    lines.push({A : amp/2 , f:  freq, ph: -PI/2 + phase}) // -ie^ix
+    lines.push({A : amp/2 , f:  -freq, ph: PI/2 - phase}) // ie^-ix
 }
 
-function cosineWave(amp , freq, phase) {
-    amp = amp || 100;
-    freq = freq || 1;
-    phase = phase || 0;
+function cosineWave(amp = 5, freq = 1, phase = 0) {
+
     currentPreset = cosineWave;
     resetGraphData();
     
-    lines.push({A: amp/2 , f: BASE_FREQ * freq , ph: phase}); // e^ix
-    lines.push({A: amp/2 , f: BASE_FREQ * -freq, ph: -phase}) // e^-ix
+    lines.push({A: amp/2 , f:  freq , ph: phase}); // e^ix
+    lines.push({A: amp/2 , f:  -freq, ph: -phase}) // e^-ix
 } 
 
-function posExpWave(amp, freq, phase) {
-    amp = amp || 100; freq = freq || 1; phase = phase || 0;
+function posExpWave(amp = 5, freq = 1, phase = 0) {
     resetGraphData();
     currentPreset =  posExpWave;
-    lines.push({A: amp, f: BASE_FREQ*freq, ph: phase});
+    lines.push({A: amp, f: freq, ph: phase});
 }
 
-function negExpWave(amp, freq, phase) {
-    amp = amp || 100; freq = freq || 1; phase = phase || 0;
+function negExpWave(amp = 5 , freq = 1, phase = 0) {
     resetGraphData();
     currentPreset =  negExpWave;
-    lines.push({A: amp, f: BASE_FREQ*-freq, ph:phase});
+    lines.push({A: amp, f: -freq, ph:phase});
 }
 
