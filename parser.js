@@ -12,7 +12,7 @@ function parseText(text) {
 }
 
 function parseLine(str) {
-    if (str.length == 0) {
+    if (str.length == 0  || str.substring(0,2) == '//') {
         return true;
     }
     let tokens = tokenize(str);
@@ -189,7 +189,7 @@ function evalPostfix(postfix) {
         let amp = pol.r;
         let ph = pol.theta + varExp.num.re;
         if (varExp.op == 'c') {
-            ph += PI/4; // convert cos(x) to sin(PI/4+ x);
+            ph += PI/2; // convert cos(x) to sin(PI/2+ x);
         }
         return [
             {A : amp/2 , f: -freq, ph: PI/2 - ph},

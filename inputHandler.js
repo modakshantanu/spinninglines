@@ -14,6 +14,7 @@ window.onload = () => {
     let syntaxButton = document.getElementById('syntax-button');
     let syntax = document.getElementById('syntax-rules');
     let scaleInput = document.getElementById('scale-input');
+    let clearButon = document.getElementById('clear-button');
     syntax.style.display = 'none';
     // let lowGraphicsButton = document.getElementById('graphics-input');
     squareButton.onclick = () => squareWave(harmonicsCount);
@@ -25,6 +26,10 @@ window.onload = () => {
     negExpButton.onclick = () => negExpWave();
     syntaxButton.onclick = () => {
         syntax.style.display = syntax.style.display === 'block' ? 'none' : 'block';
+    }
+    clearButon.onclick = () => {
+        textarea.value = '';
+        textarea.rows = 5;
     }
     // lowGraphicsButton.onclick = () => lowGraphicsMode = !lowGraphicsMode;
 

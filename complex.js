@@ -21,7 +21,7 @@ class Complex {
     polar() {
         return {
             r: this.mod(),
-            theta: Math.atan2(this.im, this.re)
+            theta: Math.atan2(this.im + 1e-9, this.re + 1e-9) // Prevent weird stuff along axes
         }
     }
 

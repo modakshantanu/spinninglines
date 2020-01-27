@@ -43,16 +43,17 @@
 		</div>
 		<hr>
 		<h2>Custom</h2>
-		<textarea id="textarea" rows="5" cols="50"></textarea>
-		<div>
+		<textarea id="textarea" rows="5" cols="60"></textarea>
+		<div style="width:440px;">
 			<button id='go-button'>Go</button>
 			<span style="color: red;" id='errormsg'></span>
+			<button id='clear-button' style ="float: right;">Clear</button>
 		</div>
 		<div>
-			<button id='syntax-button'>Show/Hide Syntax Rules</button>
+			<button id='syntax-button'>Show/Hide Syntax</button>
 		</div>
 		<div id='syntax-rules'>
-			<h3>Syntax Rules</h3>
+			<h3>Syntax</h3>
 			<ul>
 				<li>One frequency component per line</li>
 				<li>Use <b>t</b> as the variable, <b>p</b> for π , and <b>i</b> for √-1</li>
@@ -62,7 +63,7 @@
 				<li>If a line contains a variable expression, it must be of the form <i>expr*expr*...*func(var_expr)</i>. func() can be sin()/cos()/exp()</i>. <i>var_expr</i> cannot contain sin()/cos()/exp(). <i>func(var_expr)</i> must be periodic.</li>
 				<li>Example of a variable expression: <code>2/(3i + 4) * exp(-3i) * cos (0) * sin (t - p/2)</code></li>
 				<li><b>i</b>, <b>p</b>, and <b>t</b> can be chained with numbers without the need for a <code>*</code> sign. (e.g. <code>2ipt = 2*i*π*t , 3t/4i = (3*t)/(4*i)</code>)</li>
-				<li>Use <code>//</code> to comment out a line</li>
+				<li>Use <code>//</code> to comment out a line.</li>
 			</ul>
 		</div>
 	</body>
