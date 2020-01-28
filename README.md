@@ -1,3 +1,3 @@
-A tool to visualize complex functions.
+A tool to visualize complex signals.
 
 https://modakshantanu.github.io/spinninglines/
