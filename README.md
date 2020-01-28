@@ -1,2 +1,3 @@
-A fourier series visualization tool
+A tool to visualize complex functions.
+
 https://modakshantanu.github.io/spinninglines/
